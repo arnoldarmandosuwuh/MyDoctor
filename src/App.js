@@ -1,23 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { ILLogo } from './assets'
+import { GetStarted } from './pages'
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <ILLogo />
-      <Text>My Doctor</Text>
-    </View>
+    <GetStarted />
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  }
-})
 
 export default App
