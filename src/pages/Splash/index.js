@@ -17,6 +17,8 @@ const Splash = ({navigation}) => {
     )
 }
 
+export default Splash
+
 const styles = StyleSheet.create({
     page: {
         flex: 1,
@@ -31,5 +33,3 @@ const styles = StyleSheet.create({
         marginTop: 20
     }
 })
-
-export default Splash
