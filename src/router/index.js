@@ -1,7 +1,18 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Splash, GetStarted, Register, Login, UploadPhoto, Doctor, Messages, Hospitals } from '../pages'
+import { 
+    Splash, 
+    GetStarted, 
+    Register, 
+    Login, 
+    UploadPhoto, 
+    Doctor, 
+    Messages, 
+    Hospitals, 
+    ChooseDoctor, 
+    Chatting
+} from '../pages'
 import { BottomNavigator } from '../components'
 
 const Stack = createStackNavigator()
@@ -48,6 +59,16 @@ const Router = () => {
             <Stack.Screen 
                 name="MainApp" 
                 component={MainApp} 
+                options={{headerShown: false}} 
+            />
+            <Stack.Screen 
+                name="ChooseDoctor" 
+                component={ChooseDoctor} 
+                options={{headerShown: false}} 
+            />
+            <Stack.Screen 
+                name="Chatting" 
+                component={Chatting} 
                 options={{headerShown: false}} 
             />
         </Stack.Navigator>
