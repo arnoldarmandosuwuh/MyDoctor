@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { Header, Input, Button, Gap, Loading } from '../../components'
-import { colors, useForm } from '../../utils'
-import { Fire } from '../../config'
 import { showMessage, hideMessage } from 'react-native-flash-message'
+import { colors, useForm, storeData } from '../../utils'
+import { Fire } from '../../config'
 
 const Register = ({ navigation }) => {
 
@@ -32,6 +33,8 @@ const Register = ({ navigation }) => {
                     .ref('users/' +success.user.uid+'/')
                     .set(data)
                 console.log("onContinue -> success", success)
+                storeData('user', data)
+                navigation.navigate('UploadPhoto')
             })
             .catch((error) => {
                 const errorMessage = error.message
@@ -43,7 +46,6 @@ const Register = ({ navigation }) => {
                     color: colors.white,
                 })
             })
-        // navigation.navigate('UploadPhoto')
     }
 
     return (

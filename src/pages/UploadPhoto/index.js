@@ -1,10 +1,33 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import ImagePicker from 'react-native-image-picker'
+import { showMessage } from 'react-native-flash-message'
 import { Header, Button, Link, Gap } from '../../components'
-import { ILNullPhoto, IconAddPhoto } from '../../assets'
+import { ILNullPhoto, IconAddPhoto, IconRemovePhoto } from '../../assets'
 import { colors, fonts } from '../../utils'
 
 const UploadPhoto = ({ navigation }) => {
+    const [hasPhoto, setHasPhoto] = useState(false)
+    const [photo, setPhoto] = useState(ILNullPhoto)
+    const getImage = () => {
+        ImagePicker.launchImageLibrary({}, response => {
+            // Same code as in above section!
+            console.log("getImage -> response", response)
+            if(response.didCancel || response.error){
+                showMessage({
+                    message: 'Ooops, Sepertinya anda tidak memilih fotonya?',
+                    type: 'default',
+                    backgroundColor: colors.error,
+                    color: colors.white,
+                })
+            }
+            else {
+                const source =  {uri: response.uri}
+                setPhoto(source)
+                setHasPhoto(true)
+            }
+          });
+    }
     return (
         <View style={styles.page}>
             <Header 
@@ -13,15 +36,18 @@ const UploadPhoto = ({ navigation }) => {
             />
             <View style={styles.content}>
                 <View style={styles.profile}>
-                    <View style={styles.avatarWrapper}>
-                        <Image source={ILNullPhoto} style={styles.avatar} />
-                        <IconAddPhoto style={styles.addPhoto} />
-                    </View>
+                    <TouchableOpacity style={styles.avatarWrapper} onPress={getImage}>
+                        <Image source={photo} style={styles.avatar} />
+                        {hasPhoto && <IconRemovePhoto style={styles.addPhoto} />}
+                        {!hasPhoto && <IconAddPhoto style={styles.addPhoto} />}
+                        
+                    </TouchableOpacity>
                     <Text style={styles.name}>Arnold Armando</Text>
                     <Text style={styles.profession}>Android Developer</Text>
                 </View>
                 <View>
                     <Button 
+                        disable={!hasPhoto}
                         title="Upload and Continue"
                         onPress={() => navigation.replace('MainApp')}
                     />
@@ -59,6 +85,7 @@ const styles = StyleSheet.create({
     avatar: {
         width: 110,
         height: 110,
+        borderRadius: 110 / 2,
     },
     avatarWrapper: {
         width: 130,
