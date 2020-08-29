@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 import { showMessage } from 'react-native-flash-message'
+import { Fire } from '../../config'
 import { Header, Button, Link, Gap } from '../../components'
 import { ILNullPhoto, IconAddPhoto, IconRemovePhoto } from '../../assets'
-import { colors, fonts } from '../../utils'
+import { colors, fonts, storeData } from '../../utils'
 
 const UploadPhoto = ({ navigation, route }) => {
-    const {fullName, profession} = route.params
+    const {fullName, profession, uid} = route.params
     const [hasPhoto, setHasPhoto] = useState(false)
     const [photo, setPhoto] = useState(ILNullPhoto)
+    const [photoForDB, setPhotoForDB] = useState('')
     const getImage = () => {
-        ImagePicker.launchImageLibrary({}, response => {
+        ImagePicker.launchImageLibrary({quality: 0.5, maxWidth: 200, maxHeight: 200}, response => {
             // Same code as in above section!
             console.log("getImage -> response", response)
             if(response.didCancel || response.error){
@@ -23,12 +25,27 @@ const UploadPhoto = ({ navigation, route }) => {
                 })
             }
             else {
+                setPhotoForDB(`data:${response.type};base64, ${response.data}`)
                 const source =  {uri: response.uri}
                 setPhoto(source)
                 setHasPhoto(true)
             }
           });
     }
+
+    const uploadAndContinue = () => {
+        Fire.database()
+            .ref('users/' + uid +'/')
+            .update({photo: photoForDB})
+
+        const data = route.params
+        data.photo = photoForDB
+
+        storeData('user', data)
+            
+        navigation.replace('MainApp')
+    }
+
     return (
         <View style={styles.page}>
             <Header 
@@ -50,7 +67,7 @@ const UploadPhoto = ({ navigation, route }) => {
                     <Button 
                         disable={!hasPhoto}
                         title="Upload and Continue"
-                        onPress={() => navigation.replace('MainApp')}
+                        onPress={uploadAndContinue}
                     />
                     <Gap height={30} />
                     <Link 
