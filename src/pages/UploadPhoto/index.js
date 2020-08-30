@@ -35,7 +35,7 @@ const UploadPhoto = ({ navigation, route }) => {
 
     const uploadAndContinue = () => {
         Fire.database()
-            .ref('users/' + uid +'/')
+            .ref(`users/${uid}/`)
             .update({photo: photoForDB})
 
         const data = route.params

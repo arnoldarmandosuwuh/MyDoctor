@@ -15,7 +15,7 @@ const HomeProfile = ({ onPress }) => {
             console.log("Doctor -> res", res)
             const data = res
             data.photo = {uri: res.photo}
-            setProfile(res)
+            setProfile(data)
         })
     }, [])
     return (

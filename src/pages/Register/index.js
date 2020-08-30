@@ -31,7 +31,7 @@ const Register = ({ navigation }) => {
                     uid: success.user.uid,
                 }
                 Fire.database()
-                    .ref('users/' +success.user.uid+'/')
+                    .ref(`users/${success.user.uid}/`)
                     .set(data)
                 console.log("onContinue -> success", success)
                 storeData('user', data)
