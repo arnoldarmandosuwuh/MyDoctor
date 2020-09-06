@@ -63,7 +63,7 @@ const UserProfile = ({ navigation }) => {
                 icon="rate"
             />
             <List
-                name="Help Center"
+                name="Sign Out"
                 desc="Last Update Yesterday"
                 type="next"
                 icon="help"
