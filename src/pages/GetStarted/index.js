@@ -10,12 +10,21 @@ const GetStarted = ({ navigation }) => {
         <ImageBackground source={ILGetStarted} style={styles.page}>
             <View>
                 <ILLogo />
-                <Text style={styles.title}>Konsultasi dengan dokter jadi lebih mudah & fleksibel</Text>
+                <Text style={styles.title}>
+                    Konsultasi dengan dokter jadi lebih mudah & fleksibel
+                </Text>
             </View>
             <View>
-                <Button title='Get Started' onPress={() => navigation.navigate('Register')} />
+                <Button
+                    title="Get Started"
+                    onPress={() => navigation.navigate('Register')}
+                />
                 <Gap height={16} />
-                <Button type='secondary' title='Sign In' onPress={() => navigation.replace('Login')} />
+                <Button
+                    type="secondary"
+                    title="Sign In"
+                    onPress={() => navigation.replace('Login')}
+                />
             </View>
         </ImageBackground>
     )
@@ -28,12 +37,12 @@ const styles = StyleSheet.create({
         padding: 40,
         justifyContent: 'space-between',
         flex: 1,
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
     title: {
         fontSize: 28,
         color: colors.white,
         marginTop: 91,
-        fontFamily: fonts.primary[600]
-    }
+        fontFamily: fonts.primary[600],
+    },
 })

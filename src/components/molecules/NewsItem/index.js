@@ -7,7 +7,9 @@ const NewsItem = () => {
     return (
         <View style={styles.container}>
             <View style={styles.titleWrapper}>
-                <Text style={styles.title}>Is it safe to stay at home during coronavirus?</Text>
+                <Text style={styles.title}>
+                    Is it safe to stay at home during coronavirus?
+                </Text>
                 <Text style={styles.date}>Today</Text>
             </View>
             <Image source={DummyNews1} style={styles.image} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { DummyUser, ILNullPhoto } from '../../../assets'
+import { ILNullPhoto } from '../../../assets'
 import { fonts, colors, getData } from '../../../utils'
 
 const HomeProfile = ({ onPress }) => {
@@ -10,11 +10,9 @@ const HomeProfile = ({ onPress }) => {
         profession: '',
     })
     useEffect(() => {
-        getData('user')
-        .then(res => {
-            console.log("Doctor -> res", res)
+        getData('user').then((res) => {
             const data = res
-            data.photo = {uri: res.photo}
+            data.photo = { uri: res.photo }
             setProfile(data)
         })
     }, [])

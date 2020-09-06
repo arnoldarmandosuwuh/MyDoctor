@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import { colors, getData, storeData } from '../../utils'
+import { StyleSheet, View, ScrollView } from 'react-native'
+import ImagePicker from 'react-native-image-picker'
+import { colors, getData, storeData, showError } from '../../utils'
 import { Header, Profile, Input, Button, Gap } from '../../components'
 import { Fire } from '../../config'
-import { showMessage } from 'react-native-flash-message'
-import ImagePicker from 'react-native-image-picker'
 import { ILNullPhoto } from '../../assets'
 
 const UpdateProfile = ({ navigation }) => {
@@ -18,24 +17,17 @@ const UpdateProfile = ({ navigation }) => {
     const [photoForDB, setPhotoForDB] = useState('')
 
     useEffect(() => {
-        getData('user').then(res => {
+        getData('user').then((res) => {
             const data = res
-            setPhoto({uri: res.photo})
+            setPhoto({ uri: res.photo })
             setProfile(data)
         })
     }, [])
 
     const update = () => {
-        console.log('Update : ', profile)
-
-        if (password.length > 0){
+        if (password.length > 0) {
             if (password.length < 6) {
-                showMessage({
-                    message: 'Password kurang dari 6 karakter',
-                    type: 'default',
-                    backgroundColor: colors.error,
-                    color: colors.white,
-                })
+                showError('Password kurang dari 6 karakter')
             } else {
                 updatePassword()
                 updateProfileData()
@@ -48,17 +40,11 @@ const UpdateProfile = ({ navigation }) => {
     }
 
     const updatePassword = () => {
-        Fire.auth().onAuthStateChanged(user => {
-            if (user){
-                user.updatePassword(password)
-                    .catch(err => {
-                        showMessage({
-                            message: err.message,
-                            type: 'default',
-                            backgroundColor: colors.error,
-                            color: colors.white,
-                        })              
-                    })
+        Fire.auth().onAuthStateChanged((user) => {
+            if (user) {
+                user.updatePassword(password).catch((err) => {
+                    showError(err.message)
+                })
             }
         })
     }
@@ -71,16 +57,10 @@ const UpdateProfile = ({ navigation }) => {
             .ref(`users/${profile.uid}/`)
             .update(data)
             .then(() => {
-                console.log("Success", data)
                 storeData('user', data)
             })
-            .catch(err => {
-                showMessage({
-                    message: err.message,
-                    type: 'default',
-                    backgroundColor: colors.error,
-                    color: colors.white
-                })
+            .catch((err) => {
+                showError(err.message)
             })
     }
 
@@ -92,23 +72,21 @@ const UpdateProfile = ({ navigation }) => {
     }
 
     const getImage = () => {
-        ImagePicker.launchImageLibrary({quality: 0.5, maxWidth: 200, maxHeight: 200}, response => {
-            // Same code as in above section!
-            console.log("getImage -> response", response)
-            if(response.didCancel || response.error){
-                showMessage({
-                    message: 'Ooops, Sepertinya anda tidak memilih fotonya?',
-                    type: 'default',
-                    backgroundColor: colors.error,
-                    color: colors.white,
-                })
-            }
-            else {
-                setPhotoForDB(`data:${response.type};base64, ${response.data}`)
-                const source =  {uri: response.uri}
-                setPhoto(source)
-            }
-          });
+        ImagePicker.launchImageLibrary(
+            { quality: 0.5, maxWidth: 200, maxHeight: 200 },
+            (response) => {
+                // Same code as in above section!
+                if (response.didCancel || response.error) {
+                    showError('Ooops, Sepertinya anda tidak memilih fotonya?')
+                } else {
+                    setPhotoForDB(
+                        `data:${response.type};base64, ${response.data}`,
+                    )
+                    const source = { uri: response.uri }
+                    setPhoto(source)
+                }
+            },
+        )
     }
 
     return (
@@ -118,18 +96,35 @@ const UpdateProfile = ({ navigation }) => {
                 <View style={styles.content}>
                     <Profile isRemove photo={photo} onPress={getImage} />
                     <Gap height={26} />
-                    <Input label="Full Name" value={profile.fullName} onChangeText={(value) => changeText('fullName', value)} />
-                    <Gap height={24} />
-                    <Input label="Pekerjaan" value={profile.profession} onChangeText={(value) => changeText('profession', value)} />
-                    <Gap height={24} />
-                    <Input label="Email" value={profile.email} editable selectTextOnFocus />
-                    <Gap height={24} />
-                    <Input label="Password" value={password} onChangeText={(value) => setPassword(value)} secureTextEntry />
-                    <Gap height={40} />
-                    <Button 
-                        title="Save Profile"
-                        onPress={update} 
+                    <Input
+                        label="Full Name"
+                        value={profile.fullName}
+                        onChangeText={(value) => changeText('fullName', value)}
                     />
+                    <Gap height={24} />
+                    <Input
+                        label="Pekerjaan"
+                        value={profile.profession}
+                        onChangeText={(value) =>
+                            changeText('profession', value)
+                        }
+                    />
+                    <Gap height={24} />
+                    <Input
+                        label="Email"
+                        value={profile.email}
+                        editable
+                        selectTextOnFocus
+                    />
+                    <Gap height={24} />
+                    <Input
+                        label="Password"
+                        value={password}
+                        onChangeText={(value) => setPassword(value)}
+                        secureTextEntry
+                    />
+                    <Gap height={40} />
+                    <Button title="Save Profile" onPress={update} />
                 </View>
             </ScrollView>
         </View>

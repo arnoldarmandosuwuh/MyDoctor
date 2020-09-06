@@ -7,7 +7,7 @@ import { DummyDoctor11 } from '../../../assets'
 const DarkProfile = ({ type, onPress }) => {
     return (
         <View style={styles.container}>
-            <Button type="icon-only" icon='back-light' onPress={onPress} />
+            <Button type="icon-only" icon="back-light" onPress={onPress} />
             <View style={styles.content}>
                 <Text style={styles.name}>Nairobi Putri Hayza</Text>
                 <Text style={styles.desc}>Dokter Anak</Text>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     content: {
         flex: 1,

@@ -1,6 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, ImageBackground } from 'react-native'
-import { ILHospitalBG, DummyHospital1, DummyHospital2, DummyHospital3 } from '../../assets'
+import {
+    ILHospitalBG,
+    DummyHospital1,
+    DummyHospital2,
+    DummyHospital3,
+} from '../../assets'
 import { fonts, colors } from '../../utils'
 import { ListHospital } from '../../components'
 
@@ -12,9 +17,24 @@ const Hospitals = () => {
                 <Text style={styles.desc}>3 tersedia</Text>
             </ImageBackground>
             <View style={styles.content}>
-                <ListHospital type="Rumah Sakit" name="Citra Bunga Merdeka" address="Jln. Surya Sejahtera 20" pic={DummyHospital1} />
-                <ListHospital type="Rumah Sakit Anak" name="Happy Family Kids" address="Jln. Surya Sejahtera 20" pic={DummyHospital2} />
-                <ListHospital type="Rumah Sakit Jiwa" name="Tingkatan Paling Atas" address="Jln. Surya Sejahtera 20" pic={DummyHospital3} />
+                <ListHospital
+                    type="Rumah Sakit"
+                    name="Citra Bunga Merdeka"
+                    address="Jln. Surya Sejahtera 20"
+                    pic={DummyHospital1}
+                />
+                <ListHospital
+                    type="Rumah Sakit Anak"
+                    name="Happy Family Kids"
+                    address="Jln. Surya Sejahtera 20"
+                    pic={DummyHospital2}
+                />
+                <ListHospital
+                    type="Rumah Sakit Jiwa"
+                    name="Tingkatan Paling Atas"
+                    address="Jln. Surya Sejahtera 20"
+                    pic={DummyHospital3}
+                />
             </View>
         </View>
     )
@@ -25,11 +45,11 @@ export default Hospitals
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        backgroundColor: colors.secondary
+        backgroundColor: colors.secondary,
     },
     background: {
-       height: 240,
-       paddingTop: 30,
+        height: 240,
+        paddingTop: 30,
     },
     title: {
         fontSize: 20,

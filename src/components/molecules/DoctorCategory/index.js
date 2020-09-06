@@ -5,13 +5,13 @@ import { colors, fonts } from '../../../utils'
 
 const DoctorCategory = ({ category, onPress }) => {
     const Icon = () => {
-        if(category === 'dokter umum') {
+        if (category === 'dokter umum') {
             return <ILCatUmum style={styles.illustration} />
         }
-        if(category === 'psikiater') {
+        if (category === 'psikiater') {
             return <ILCatPsikiater style={styles.illustration} />
         }
-        if(category === 'dokter obat') {
+        if (category === 'dokter obat') {
             return <ILCatObat style={styles.illustration} />
         }
         return <ILCatUmum style={styles.illustration} />

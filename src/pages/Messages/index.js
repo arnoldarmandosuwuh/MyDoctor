@@ -29,19 +29,17 @@ const Messages = ({ navigation }) => {
         <View style={styles.page}>
             <View style={styles.content}>
                 <Text style={styles.title}>Messages</Text>
-                {
-                    doctors.map(doctor => {
-                        return (
-                            <List 
-                                key={doctor.id}
-                                profile={doctor.profile} 
-                                name={doctor.name} 
-                                desc={doctor.desc}
-                                onPress={() => navigation.navigate('Chatting')} 
-                            />
-                        )
-                    })
-                }
+                {doctors.map((doctor) => {
+                    return (
+                        <List
+                            key={doctor.id}
+                            profile={doctor.profile}
+                            name={doctor.name}
+                            desc={doctor.desc}
+                            onPress={() => navigation.navigate('Chatting')}
+                        />
+                    )
+                })}
             </View>
         </View>
     )
@@ -52,7 +50,7 @@ export default Messages
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        backgroundColor: colors.secondary
+        backgroundColor: colors.secondary,
     },
     content: {
         flex: 1,
@@ -65,6 +63,6 @@ const styles = StyleSheet.create({
         fontFamily: fonts.primary[600],
         color: colors.text.primary,
         marginTop: 30,
-        marginLeft: 16
+        marginLeft: 16,
     },
 })

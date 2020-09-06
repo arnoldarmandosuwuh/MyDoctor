@@ -12,15 +12,15 @@ import UserProfile from './UserProfile'
 import UpdateProfile from './UpdateProfile'
 import DoctorProfile from './DoctorProfile'
 
-export { 
-    Splash, 
-    GetStarted, 
-    Register, 
-    Login, 
-    UploadPhoto, 
-    Doctor, 
-    Messages, 
-    Hospitals, 
+export {
+    Splash,
+    GetStarted,
+    Register,
+    Login,
+    UploadPhoto,
+    Doctor,
+    Messages,
+    Hospitals,
     ChooseDoctor,
     Chatting,
     UserProfile,

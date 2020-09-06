@@ -12,12 +12,12 @@ import Profile from './Profile'
 import ProfileItem from './ProfileItem'
 import Loading from './Loading'
 
-export { 
-    Header, 
-    BottomNavigator, 
-    HomeProfile, 
-    DoctorCategory, 
-    RatedDoctor, 
+export {
+    Header,
+    BottomNavigator,
+    HomeProfile,
+    DoctorCategory,
+    RatedDoctor,
     NewsItem,
     List,
     ListHospital,

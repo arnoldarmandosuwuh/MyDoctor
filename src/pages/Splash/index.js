@@ -4,17 +4,19 @@ import { ILLogo } from '../../assets'
 import { colors, fonts } from '../../utils'
 import { Fire } from '../../config'
 
-const Splash = ({navigation}) => {
+const Splash = ({ navigation }) => {
     useEffect(() => {
-        setTimeout(() => {
-            Fire.auth().onAuthStateChanged((user) => {
-                if(user){
+        const unsubscribe = Fire.auth().onAuthStateChanged((user) => {
+            setTimeout(() => {
+                if (user) {
                     navigation.replace('MainApp')
                 } else {
                     navigation.replace('GetStarted')
                 }
-            })
-        }, 3000)
+            }, 3000)
+        })
+
+        return () => unsubscribe()
     }, [navigation])
     return (
         <View style={styles.page}>
@@ -37,6 +39,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: fonts.primary[600],
         color: colors.text.primary,
-        marginTop: 20
-    }
+        marginTop: 20,
+    },
 })

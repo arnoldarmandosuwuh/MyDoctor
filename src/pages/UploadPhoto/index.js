@@ -1,80 +1,75 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
-import { showMessage } from 'react-native-flash-message'
 import { Fire } from '../../config'
 import { Header, Button, Link, Gap } from '../../components'
 import { ILNullPhoto, IconAddPhoto, IconRemovePhoto } from '../../assets'
-import { colors, fonts, storeData } from '../../utils'
+import { colors, fonts, storeData, showError } from '../../utils'
 
 const UploadPhoto = ({ navigation, route }) => {
-    const {fullName, profession, uid} = route.params
+    const { fullName, profession, uid } = route.params
     const [hasPhoto, setHasPhoto] = useState(false)
     const [photo, setPhoto] = useState(ILNullPhoto)
     const [photoForDB, setPhotoForDB] = useState('')
     const getImage = () => {
-        ImagePicker.launchImageLibrary({quality: 0.5, maxWidth: 200, maxHeight: 200}, response => {
-            // Same code as in above section!
-            console.log("getImage -> response", response)
-            if(response.didCancel || response.error){
-                showMessage({
-                    message: 'Ooops, Sepertinya anda tidak memilih fotonya?',
-                    type: 'default',
-                    backgroundColor: colors.error,
-                    color: colors.white,
-                })
-            }
-            else {
-                setPhotoForDB(`data:${response.type};base64, ${response.data}`)
-                const source =  {uri: response.uri}
-                setPhoto(source)
-                setHasPhoto(true)
-            }
-          });
+        ImagePicker.launchImageLibrary(
+            { quality: 0.5, maxWidth: 200, maxHeight: 200 },
+            (response) => {
+                // Same code as in above section!
+                if (response.didCancel || response.error) {
+                    showError('Ooops, Sepertinya anda tidak memilih fotonya?')
+                } else {
+                    setPhotoForDB(
+                        `data:${response.type};base64, ${response.data}`,
+                    )
+                    const source = { uri: response.uri }
+                    setPhoto(source)
+                    setHasPhoto(true)
+                }
+            },
+        )
     }
 
     const uploadAndContinue = () => {
-        Fire.database()
-            .ref(`users/${uid}/`)
-            .update({photo: photoForDB})
+        Fire.database().ref(`users/${uid}/`).update({ photo: photoForDB })
 
         const data = route.params
         data.photo = photoForDB
 
         storeData('user', data)
-            
+
         navigation.replace('MainApp')
     }
 
     return (
         <View style={styles.page}>
-            <Header 
-                title="Upload Photo" 
-                onPress={() => navigation.goBack()}
-            />
+            <Header title="Upload Photo" onPress={() => navigation.goBack()} />
             <View style={styles.content}>
                 <View style={styles.profile}>
-                    <TouchableOpacity style={styles.avatarWrapper} onPress={getImage}>
+                    <TouchableOpacity
+                        style={styles.avatarWrapper}
+                        onPress={getImage}>
                         <Image source={photo} style={styles.avatar} />
-                        {hasPhoto && <IconRemovePhoto style={styles.addPhoto} />}
+                        {hasPhoto && (
+                            <IconRemovePhoto style={styles.addPhoto} />
+                        )}
                         {!hasPhoto && <IconAddPhoto style={styles.addPhoto} />}
-                        
                     </TouchableOpacity>
                     <Text style={styles.name}>{fullName}</Text>
                     <Text style={styles.profession}>{profession}</Text>
                 </View>
                 <View>
-                    <Button 
+                    <Button
                         disable={!hasPhoto}
                         title="Upload and Continue"
                         onPress={uploadAndContinue}
                     />
                     <Gap height={30} />
-                    <Link 
-                        title="Skip for this" 
-                        align="center" 
+                    <Link
+                        title="Skip for this"
+                        align="center"
                         size={16}
-                        onPress={() => navigation.replace('MainApp')} 
+                        onPress={() => navigation.replace('MainApp')}
                     />
                 </View>
             </View>
@@ -87,7 +82,7 @@ export default UploadPhoto
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
     content: {
         flex: 1,
@@ -98,7 +93,7 @@ const styles = StyleSheet.create({
     profile: {
         alignItems: 'center',
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     avatar: {
         width: 110,
@@ -112,7 +107,7 @@ const styles = StyleSheet.create({
         borderColor: colors.border,
         borderRadius: 130 / 2,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     addPhoto: {
         position: 'absolute',
@@ -123,7 +118,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: colors.text.primary,
         fontFamily: fonts.primary[600],
-        textAlign: 'center'
+        textAlign: 'center',
     },
     profession: {
         fontSize: 18,
