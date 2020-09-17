@@ -46,7 +46,8 @@
         "trailingComma": "all",
         "semi": false,
         "endOfLine": "auto",
-        "tabWidth": 4
+        "tabWidth": 2,
+        "code": 80
       },
       {
         "usePrettierrc": false
