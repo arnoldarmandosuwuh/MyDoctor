@@ -26,7 +26,6 @@ const Doctor = ({ navigation }) => {
             .ref('category_doctor/')
             .once('value')
             .then((res) => {
-                console.log('Category Doctor -> res', res.val())
                 if (res.val()) {
                     const data = res.val()
                     const filterData = data.filter((el) => el !== null)
@@ -45,7 +44,6 @@ const Doctor = ({ navigation }) => {
             .limitToLast(3)
             .once('value')
             .then((res) => {
-                console.log('Top Rated Doctors -> res', res.val())
                 if (res.val()) {
                     const oldData = res.val()
                     const data = []
@@ -55,7 +53,6 @@ const Doctor = ({ navigation }) => {
                             data: oldData[key],
                         })
                     })
-                    console.log('getTopRatedDoctors -> data', data)
                     setDoctors(data)
                 }
             })
@@ -69,7 +66,6 @@ const Doctor = ({ navigation }) => {
             .ref('news/')
             .once('value')
             .then((res) => {
-                console.log('News -> res', res.val())
                 if (res.val()) {
                     const data = res.val()
                     const filterData = data.filter((el) => el !== null)

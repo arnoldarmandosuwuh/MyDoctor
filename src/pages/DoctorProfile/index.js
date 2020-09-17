@@ -5,6 +5,7 @@ import { colors } from '../../utils'
 
 const DoctorProfile = ({ navigation, route }) => {
     const dataDoctor = route.params
+
     return (
         <View style={styles.page}>
             <Header
@@ -14,7 +15,7 @@ const DoctorProfile = ({ navigation, route }) => {
             <Profile
                 name={dataDoctor.data.fullName}
                 desc={dataDoctor.data.profession}
-                photor={{ uri: dataDoctor.data.photo }}
+                photo={{ uri: dataDoctor.data.photo }}
             />
             <Gap height={10} />
             <ProfileItem label="Alumnus" value={dataDoctor.data.university} />
@@ -26,7 +27,7 @@ const DoctorProfile = ({ navigation, route }) => {
             <View style={styles.action}>
                 <Button
                     title="Start Consultation"
-                    onPress={() => navigation.navigate('Chatting')}
+                    onPress={() => navigation.navigate('Chatting', dataDoctor)}
                 />
             </View>
         </View>
