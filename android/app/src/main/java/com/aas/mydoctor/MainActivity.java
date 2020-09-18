@@ -1,4 +1,4 @@
-package com.mydoctor;
+package com.aas.mydoctor;
 
 import com.facebook.react.ReactActivity;
 
