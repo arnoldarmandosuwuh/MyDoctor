@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ImageBackground } from 'react-native'
 import {
   ILHospitalBG,
@@ -6,10 +6,33 @@ import {
   DummyHospital2,
   DummyHospital3,
 } from '../../assets'
-import { fonts, colors } from '../../utils'
+import { fonts, colors, showError } from '../../utils'
 import { ListHospital } from '../../components'
+import { Fire } from '../../config'
 
 const Hospitals = () => {
+  const [hospital, setHospital] = useState([])
+
+  useEffect(() => {
+    getHospital()
+  }, [])
+
+  const getHospital = () => {
+    Fire.database()
+      .ref('hospitals/')
+      .once('value')
+      .then((res) => {
+        if (res.val()) {
+          const data = res.val()
+          const filterData = data.filter((el) => el !== null)
+          setHospital(filterData)
+        }
+      })
+      .catch((err) => {
+        showError(err.message)
+      })
+  }
+
   return (
     <View style={styles.page}>
       <ImageBackground source={ILHospitalBG} style={styles.background}>
