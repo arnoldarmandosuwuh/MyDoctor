@@ -46,18 +46,6 @@ const Hospitals = () => {
           address="Jln. Surya Sejahtera 20"
           pic={DummyHospital1}
         />
-        <ListHospital
-          type="Rumah Sakit Anak"
-          name="Happy Family Kids"
-          address="Jln. Surya Sejahtera 20"
-          pic={DummyHospital2}
-        />
-        <ListHospital
-          type="Rumah Sakit Jiwa"
-          name="Tingkatan Paling Atas"
-          address="Jln. Surya Sejahtera 20"
-          pic={DummyHospital3}
-        />
       </View>
     </View>
   )
