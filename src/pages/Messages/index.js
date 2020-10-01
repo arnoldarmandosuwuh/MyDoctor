@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import { List } from '../../components'
 import { colors, fonts, getData } from '../../utils'
 import { Fire } from '../../config'
-import { ILNullPhoto } from '../../assets'
 
 const Messages = ({ navigation }) => {
   const [user, setUser] = useState({})
@@ -56,11 +55,7 @@ const Messages = ({ navigation }) => {
           return (
             <List
               key={chat.id}
-              profile={
-                chat.detailDoctor.photo.length > 1
-                  ? { uri: chat.detailDoctor.photo }
-                  : ILNullPhoto
-              }
+              profile={{ uri: chat.detailDoctor.photo }}
               name={chat.detailDoctor.fullName}
               desc={chat.lastContentChat}
               onPress={() => navigation.navigate('Chatting', dataDoctor)}
