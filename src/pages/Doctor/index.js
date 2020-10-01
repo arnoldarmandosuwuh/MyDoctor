@@ -9,6 +9,7 @@ import {
 } from '../../components'
 import { fonts, colors, showError } from '../../utils'
 import { Fire } from '../../config'
+import { ILNullPhoto } from '../../assets'
 
 const Doctor = ({ navigation }) => {
   const [news, setNews] = useState([])
@@ -114,7 +115,11 @@ const Doctor = ({ navigation }) => {
                   key={doctor.id}
                   name={doctor.data.fullName}
                   desc={doctor.data.profession}
-                  avatar={{ uri: doctor.data.photo }}
+                  avatar={
+                    doctor.data.photo.length > 1
+                      ? { uri: doctor.data.photo }
+                      : ILNullPhoto
+                  }
                   onPress={() => navigation.navigate('DoctorProfile', doctor)}
                 />
               )
