@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ImageBackground } from 'react-native'
-import {
-  ILHospitalBG,
-  DummyHospital1,
-  DummyHospital2,
-  DummyHospital3,
-} from '../../assets'
+import { ILHospitalBG } from '../../assets'
 import { fonts, colors, showError } from '../../utils'
 import { ListHospital } from '../../components'
 import { Fire } from '../../config'
 
 const Hospitals = () => {
   const [hospital, setHospital] = useState([])
+  const [count, setCount] = useState()
 
   useEffect(() => {
     getHospital()
@@ -26,6 +22,7 @@ const Hospitals = () => {
           const data = res.val()
           const filterData = data.filter((el) => el !== null)
           setHospital(filterData)
+          setCount(filterData.length)
         }
       })
       .catch((err) => {
@@ -37,15 +34,20 @@ const Hospitals = () => {
     <View style={styles.page}>
       <ImageBackground source={ILHospitalBG} style={styles.background}>
         <Text style={styles.title}>Nearby Hospitals</Text>
-        <Text style={styles.desc}>3 tersedia</Text>
+        <Text style={styles.desc}>{`${count} tersedia`}</Text>
       </ImageBackground>
       <View style={styles.content}>
-        <ListHospital
-          type="Rumah Sakit"
-          name="Citra Bunga Merdeka"
-          address="Jln. Surya Sejahtera 20"
-          pic={DummyHospital1}
-        />
+        {hospital.map((item) => {
+          return (
+            <ListHospital
+              key={item.id}
+              type={item.type}
+              name={item.name}
+              address={item.address}
+              pic={{ uri: item.pic }}
+            />
+          )
+        })}
       </View>
     </View>
   )
