@@ -44,7 +44,6 @@ const Chatting = ({ navigation, route }) => {
               data: newDataChat,
             })
           })
-          console.log('Chatting -> allDataChat', allDataChat)
           setChatData(allDataChat)
         }
       })

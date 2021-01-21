@@ -72,8 +72,8 @@ const UpdateProfile = ({ navigation }) => {
   }
 
   const getImage = () => {
-  launchImageLibrary(
-      { quality: 0.5, maxWidth: 200, maxHeight: 200, includeBase64: true, },
+    launchImageLibrary(
+      { quality: 0.5, maxWidth: 200, maxHeight: 200, includeBase64: true },
       (response) => {
         // Same code as in above section!
         if (response.didCancel || response.error) {

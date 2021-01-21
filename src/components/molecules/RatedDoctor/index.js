@@ -22,9 +22,7 @@ const RatedDoctor = ({ avatar, name, desc, onPress, rate }) => {
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.category}>{desc}</Text>
       </View>
-      <View style={styles.rate}>
-        {renderStar()}
-      </View>
+      <View style={styles.rate}>{renderStar()}</View>
     </TouchableOpacity>
   )
 }
