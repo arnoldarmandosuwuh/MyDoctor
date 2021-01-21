@@ -136,7 +136,7 @@ const Chatting = ({ navigation, route }) => {
       </View>
       <InputChat
         value={chatContent}
-        placeholder={`Tulis Pesan Untuk ${dataDoctor.data.fullName}`}
+        targetChat={dataDoctor}
         onChangeText={(value) => setChatContent(value)}
         onButtonPress={chatSend}
       />

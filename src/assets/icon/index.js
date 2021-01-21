@@ -8,7 +8,6 @@ import IconMessages from './ic-messages.svg'
 import IconMessagesActive from './ic-messages-active.svg'
 import IconHospitals from './ic-hospitals.svg'
 import IconHospitalsActive from './ic-hospitals-active.svg'
-import IconStar from './ic-star.svg'
 import IconNext from './ic-next.svg'
 import IconSendDark from './ic-send-dark.svg'
 import IconSendLight from './ic-send-light.svg'
@@ -18,6 +17,9 @@ import IconRate from './ic-rate.svg'
 import IconHelp from './ic-help.svg'
 import IconMale from './ic-male.svg'
 import IconFemale from './ic-female.svg'
+import IconLogout from './ic-logout.svg'
+import IconStarOn from './ic-star-on.svg'
+import IconStarOff from './ic-star-off.svg'
 
 export {
   IconBackDark,
@@ -30,7 +32,6 @@ export {
   IconMessagesActive,
   IconHospitals,
   IconHospitalsActive,
-  IconStar,
   IconNext,
   IconSendDark,
   IconSendLight,
@@ -40,4 +41,7 @@ export {
   IconHelp,
   IconMale,
   IconFemale,
+  IconLogout,
+  IconStarOn,
+  IconStarOff,
 }

@@ -115,6 +115,7 @@ const Doctor = ({ navigation }) => {
                   name={doctor.data.fullName}
                   desc={doctor.data.profession}
                   avatar={{ uri: doctor.data.photo }}
+                  rate={doctor.data.rate}
                   onPress={() => navigation.navigate('DoctorProfile', doctor)}
                 />
               )

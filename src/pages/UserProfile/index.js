@@ -52,21 +52,27 @@ const UserProfile = ({ navigation }) => {
       />
       <List
         name="Language"
-        desc="Last Update Yesterday"
+        desc="Available 12 languages"
         type="next"
         icon="language"
       />
       <List
         name="Give Us Rate"
-        desc="Last Update Yesterday"
+        desc="On Google Play Store"
         type="next"
         icon="rate"
       />
       <List
-        name="Sign Out"
-        desc="Last Update Yesterday"
+        name="Help Center"
+        desc="Read our guidelines"
         type="next"
         icon="help"
+      />
+      <List
+        name="Sign Out"
+        desc="Sign out your account"
+        type="next"
+        icon="logout"
         onPress={signOut}
       />
     </View>

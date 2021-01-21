@@ -7,6 +7,7 @@ import {
   IconLanguage,
   IconRate,
   IconHelp,
+  IconLogout,
 } from '../../../assets'
 
 const List = ({ profile, name, desc, type, onPress, icon }) => {
@@ -22,6 +23,9 @@ const List = ({ profile, name, desc, type, onPress, icon }) => {
     }
     if (icon === 'help') {
       return <IconHelp />
+    }
+    if (icon === 'logout') {
+      return <IconLogout />
     }
     return <IconEditProfile />
   }

@@ -1,9 +1,20 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { IconStar } from '../../../assets'
+import { IconStarOn, IconStarOff } from '../../../assets'
 import { fonts, colors } from '../../../utils'
 
-const RatedDoctor = ({ avatar, name, desc, onPress }) => {
+const RatedDoctor = ({ avatar, name, desc, onPress, rate }) => {
+  const renderStar = () => {
+    let star = []
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rate) {
+        star.push(<IconStarOn key={i} />)
+      } else {
+        star.push(<IconStarOff key={i} />)
+      }
+    }
+    return star
+  }
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={avatar} style={styles.avatar} />
@@ -12,11 +23,7 @@ const RatedDoctor = ({ avatar, name, desc, onPress }) => {
         <Text style={styles.category}>{desc}</Text>
       </View>
       <View style={styles.rate}>
-        <IconStar />
-        <IconStar />
-        <IconStar />
-        <IconStar />
-        <IconStar />
+        {renderStar()}
       </View>
     </TouchableOpacity>
   )
